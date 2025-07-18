@@ -1,0 +1,204 @@
+@charset "utf-8";
+
+/************************************
+ * Reset
+************************************/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+body,
+p {
+  margin: 0;
+}
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+label {
+  line-height: 1.1;
+}
+a:not([class]) {
+  color: currentColor;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+select {
+  font: inherit;
+}
+
+/************************************
+ * Base
+ ************************************/
+:root {
+  --base-width: 375; /* 基準幅 */
+  --max-width: 640; /* 最大幅 */
+  --base-font-size: 10; /* 基準フォントサイズ (10px) */
+  /* 最大横幅サイズ時の最大フォントサイズ */
+  --max-font-size: calc((var(--base-font-size) / var(--base-width)) * var(--max-width) * 1px);
+}
+
+html {
+  /** 以下指定で、横幅が --base-width 時に 1rem が 10pxとなる */
+  font-size: min(calc((var(--base-font-size) / var(--base-width)) * 100vw), var(--max-font-size));
+  scroll-behavior: smooth;
+}
+
+html[lang="ja"] body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Arial, "メイリオ", Meiryo, sans-serif;
+}
+
+html[lang="en"] body {
+	font-family: "Noto Sans", sans-serif;
+	font-weight: 400;
+}
+
+html[lang="zh-cmn-Hans"] body {
+	font-family: "Noto Sans TC", sans-serif;
+	font-weight: 400;
+}
+
+html[lang="ko"] body {
+	font-family: "Noto Sans KR", sans-serif;
+	font-weight: 400;
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-style: normal;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+}
+img,
+svg {
+  width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+a {
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+@media (hover: hover) {
+  a:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  label:hover {
+    cursor: pointer;
+  }
+}
+select {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-size: 1.4rem;
+}
+/************************************
+ * Page
+************************************/
+.page-wrap {
+  width: 100%;
+  max-width: calc(var(--max-width) * 1px);
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+/******** MAP section ********/
+.sec-map__list {
+  padding: 1.5rem;
+  display: none;
+}
+.sec-map__list-item:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.sec-map__list-item-header {
+  display: block;
+  padding: 1.5rem 1.2rem;
+  background-color: #fff;
+  border-radius: 4px;
+  position: relative;
+  color: #111;
+  text-align: center;
+  font-size: 1.4rem;
+}
+@media (hover: hover) {
+  .sec-map__list-item-header:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+}
+.sec-map__list-item-header::after {
+  width: 1.3rem;
+  height: 1.3rem;
+  content: '';
+  mask: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyBpZD0ibWRpLXBsdXMtbWludXMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUwIDUwIj4gICA8cGF0aCBkPSJNMjEuNDQsMy42M3YxNy44MUgzLjYzdjcuMTJoMTcuODF2MTcuODFoNy4xMnYtMTcuODFoMTcuODF2LTcuMTJoLTE3LjgxVjMuNjNoLTcuMTIiLz4gPC9zdmc+) center / 100% auto no-repeat;
+  background-color: #111;
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  transform: translateY(-50%);
+}
+.sec-map__list-item-header input[type='checkbox'] {
+  display: none;
+}
+.sec-map__list-item-body {
+  height: 0;
+  padding: 0 1rem;
+  overflow: hidden;
+  transition: padding 0.3s;
+}
+/* for when opened */
+.sec-map__list-item-header:has(input[type='checkbox']:checked) + .sec-map__list-item-body {
+  height: auto;
+  padding: 1.5rem 1rem 0.5rem 1rem;
+  transition: padding 0.3s;
+}
+.sec-map__list-item-header:has(input[type='checkbox']:checked)::after {
+  mask: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyBpZD0ibWRpLXBsdXMtbWludXMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUwIDUwIj4gICA8cmVjdCB4PSIzLjYzIiB5PSIyMS40NCIgd2lkdGg9IjQyLjc1IiBoZWlnaHQ9IjcuMTIiLz4gPC9zdmc+) center / 100% auto no-repeat;
+}
+/* / for when opened */
+.sec-map__list-sub-item {
+  margin-bottom: 1.5em;
+}
+.sec-map__list-sub-item-header {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  text-align: center;
+  font-size: 1.4rem;
+}
+.sec-map__list-sub-item-table {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+.sec-map__list-sub-item-table th,
+.sec-map__list-sub-item-table td {
+  padding: 0.3rem 0;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: top;
+}
+.sec-map__list-sub-item-table th {
+  width: 20%;
+}
+.sec-map__list-sub-item-iframe {
+  width: 100%;
+  border: none;
+}
+/******** / MAP section ********/
