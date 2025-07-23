@@ -30,4 +30,4 @@ jobs:
           remoteDir: "/home/xb780382/xb780382.xbiz.jp/public_html"
           compress: true
           forceUpload: true
-          dryRun: true
+          # dryRun: true
