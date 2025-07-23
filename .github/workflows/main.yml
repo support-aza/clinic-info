@@ -9,24 +9,24 @@ jobs:
     strategy:
       matrix:
         server:
-          - { host: "server1.example.com", username: "user1" }
-          - { host: "server2.example.com", username: "user2" }
-          - { host: "server3.example.com", username: "user3" }
-      fail-fast: false
-      max-parallel: 3
-      
+          - { host: "xb780382.xbiz.jp", username: "xb780382", port: 10022 }
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 #リポジトリのソースを取得
-
-      # - name: init SSH agent
-      #   uses: webfactory/ssh-agent@v0.9.0
-
-      # - name: test
-      #   run: echo "${{ secrets.XSERVER_SFPT_PASSPHRASE }}"
-
-      # - name: Upload via SFTP
-      #   uses: wangyucode/sftp-upload-action@v2.0.4
-
+        
       - name: test
-        run: echo "⭐️ ${{matrix.server.host}} ${{matrix.server.username}}"
+        run: echo "⭐️ ${{matrix.server.host}} ${{matrix.server.username}} ${{secrets.XSERVER_SFTP_PRIVATE_KEY}} ${{secrets.XSERVER_SFTP_PASSPHRASE}}"
+
+      # - name: SFTP deploy to ${{ matrix.server }}
+      #   uses: wangyucode/sftp-upload-action@v2.0.4
+      #   with:
+      #     host: ${{ matrix.server.host }}
+      #     username: ${{ matrix.server.username }}
+      #     privateKey: ${{ secrets.XSERVER_SFTP_PRIVATE_KEY }}   # 鍵認証
+      #     passphrase: ${{ secrets.XSERVER_SFTP_PASSPHRASE }}  # 鍵にパスフレーズがある場合
+      #     localDir: "./"
+      #     remoteDir: "/home/xb780382/andmedical-group.com/public_html/clinic-list"
+      #     compress: true
+      #     forceUpload: true
+      #     dryRun: true
