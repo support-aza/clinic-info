@@ -29,4 +29,4 @@ jobs:
       #   uses: wangyucode/sftp-upload-action@v2.0.4
 
       - name: test
-        run: "⭐️ ${{matrix.server.host}} ${{matrix.server.username}}"
+        run: echo "⭐️ ${{matrix.server.host}} ${{matrix.server.username}}"
