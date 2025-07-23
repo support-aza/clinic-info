@@ -6,13 +6,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        server:
+          - { host: "server1.example.com", username: "user1" }
+          - { host: "server2.example.com", username: "user2" }
+          - { host: "server3.example.com", username: "user3" }
+      fail-fast: false
+      max-parallel: 3
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 #リポジトリのソースを取得
 
-      # - name: init SSH agent
-      #   uses: webfactory/ssh-agent@v0.9.0
+      - name: init SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+
+      # - name: test
+      #   run: echo "${{ secrets.XSERVER_SFPT_PASSPHRASE }}"
+
+      # - name: Upload via SFTP
+      #   uses: wangyucode/sftp-upload-action@v2.0.4
 
       - name: test
-        run: echo "${{ secrets.XSERVER_SFPT_PASSPHRASE }} ${{ secrets.XSERVER_SFTP_PRIVATE_KEY }}"
+        run: "⭐️ ${{matrix.server.host}} ${{matrix.server.username}}"
