@@ -18,15 +18,15 @@ jobs:
       - name: test
         run: echo "⭐️ ${{matrix.server.host}} ${{matrix.server.username}} ${{secrets.XSERVER_SFTP_PRIVATE_KEY}} ${{secrets.XSERVER_SFTP_PASSPHRASE}}"
 
-      # - name: SFTP deploy to ${{ matrix.server }}
-      #   uses: wangyucode/sftp-upload-action@v2.0.4
-      #   with:
-      #     host: ${{ matrix.server.host }}
-      #     username: ${{ matrix.server.username }}
-      #     privateKey: ${{ secrets.XSERVER_SFTP_PRIVATE_KEY }}   # 鍵認証
-      #     passphrase: ${{ secrets.XSERVER_SFTP_PASSPHRASE }}  # 鍵にパスフレーズがある場合
-      #     localDir: "./"
-      #     remoteDir: "/home/xb780382/andmedical-group.com/public_html/clinic-list"
-      #     compress: true
-      #     forceUpload: true
-      #     dryRun: true
+      - name: SFTP deploy to ${{ matrix.server.host }}
+        uses: wangyucode/sftp-upload-action@v2.0.4
+        with:
+          host: ${{ matrix.server.host }}
+          username: ${{ matrix.server.username }}
+          privateKey: ${{ secrets.XSERVER_SFTP_PRIVATE_KEY }}   # 鍵認証
+          passphrase: ${{ secrets.XSERVER_SFTP_PASSPHRASE }}  # 鍵にパスフレーズがある場合
+          localDir: "./"
+          remoteDir: "/home/xb780382/xb780382.xbiz.jp/public_html"
+          compress: true
+          forceUpload: true
+          dryRun: true
