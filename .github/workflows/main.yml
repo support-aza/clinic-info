@@ -14,15 +14,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 #リポジトリのソースを取得
-        
-      - name: test
-        run: echo "⭐️ ${{matrix.server.host}} ${{matrix.server.username}} ${{secrets.XSERVER_SFTP_PRIVATE_KEY}} ${{secrets.XSERVER_SFTP_PASSPHRASE}}"
 
-      - name: SFTP deploy to ${{ matrix.server.host }}
+      - name: test
+        run: echo "⭐️ ${{matrix.server.host}} ${{matrix.server.username}} ${{matrix.server.port}}"
+
+      - name: SFTP deploy to ${{ matrix.server }}
         uses: wangyucode/sftp-upload-action@v2.0.4
         with:
           host: ${{ matrix.server.host }}
           username: ${{ matrix.server.username }}
+          port: ${{ matrix.server.port }}
           privateKey: ${{ secrets.XSERVER_SFTP_PRIVATE_KEY }}   # 鍵認証
           passphrase: ${{ secrets.XSERVER_SFTP_PASSPHRASE }}  # 鍵にパスフレーズがある場合
           localDir: "./"
